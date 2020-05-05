@@ -13,7 +13,7 @@ public class Main {
         //ProduitManager pm = new ProduitManager();
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-        //BitcoinService bitcoinService = ctx.getBean("bitcoinService",BitcoinService.class);
+        //BitcoinService bitcoinService = ctx.getBean("bitcoinServiceCache",BitcoinService.class);
         BitcoinService bitcoinServiceWhithoutCache = ctx.getBean("bitcoinServiceNC",BitcoinService.class);
         ProduitManager pm = ctx.getBean(ProduitManager.class);
         //WebPageManager webPageManager = ctx.getBean(WebPageManager.class);
@@ -45,9 +45,9 @@ public class Main {
                     System.out.println("Quel numéro de produit ?");
                     pm.afficherDetailProduit(scanner.nextInt());
                     break;
-                case 5:
+                /*case 5:
                     pm.initialiserCatalogue();
-                    break;
+                    break;*/
                 case 0:
                     System.out.println("Au revoir !");
                     return;

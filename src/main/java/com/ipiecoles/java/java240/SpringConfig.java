@@ -1,5 +1,7 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
 import javax.net.ssl.*;
@@ -8,8 +10,12 @@ import java.security.cert.X509Certificate;
 import java.util.BitSet;
 
 @Configuration
+@PropertySource("classpath:app.properties")
 @ComponentScan(basePackages = "com.ipiecoles.java.java240")
 public class SpringConfig {
+
+    @Value("${bitcoinService.forceRefresh}")
+    private Boolean forceRefresh;
 
     @Bean(name = "disableSSL")
     public Boolean disableSSLValidation() throws Exception {
@@ -40,20 +46,17 @@ public class SpringConfig {
         return true;
     }
 
-    @Bean (name = "bitcoinService")
-    @Scope("singleton")
-    public BitcoinService bitcoinService(){
-        System.out.println("Instantiation du bean BitcoinService par Spring");
-        BitcoinService bitcoinService = new BitcoinService(/*webPageManager()*/);
-        return bitcoinService;
-    }
+
+
+
 
     @Bean (name = "bitcoinServiceNC")
-    @Primary
+    //@Primary
+    @Qualifier("cache")
     public BitcoinService bitcoinServiceNoCache(){
         System.out.println("Instantiation du bean BitcoinService sans cache par Spring");
         BitcoinService bitcoinService = new BitcoinService(/*webPageManager()*/);
-        bitcoinService.setForceRefresh(true);
+        bitcoinService.setForceRefresh(forceRefresh);
         return bitcoinService;
     }
 

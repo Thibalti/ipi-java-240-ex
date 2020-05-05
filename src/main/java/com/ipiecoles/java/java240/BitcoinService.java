@@ -1,6 +1,7 @@
 package com.ipiecoles.java.java240;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class BitcoinService {
     private Boolean forceRefresh = false;
 
     @Autowired
-    private WebPageManager webPageManager = new WebPageManager();
+    private WebPageManager webPageManager/* = new WebPageManager()*/;
     //public BitcoinService(WebPageManager webPageManager) {
     //    this.webPageManager = webPageManager;
     //}
