@@ -13,7 +13,6 @@ public class Main {
         //ProduitManager pm = new ProduitManager();
 
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-        //BitcoinService bitcoinService = ctx.getBean("bitcoinServiceCache",BitcoinService.class);
         BitcoinService bitcoinServiceWhithoutCache = ctx.getBean("bitcoinServiceNC",BitcoinService.class);
         ProduitManager pm = ctx.getBean(ProduitManager.class);
         //WebPageManager webPageManager = ctx.getBean(WebPageManager.class);
