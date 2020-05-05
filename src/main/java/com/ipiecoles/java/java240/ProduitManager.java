@@ -1,5 +1,9 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +13,15 @@ public class ProduitManager {
 
     private List<Produit> produits = new ArrayList<>();
 
-    private BitcoinService bitcoinService = new BitcoinService();
+    //private BitcoinService bitcoinService = new BitcoinService(webPageManager);
+    //private WebPageManager webPageManager = new WebPageManager();
 
-    private WebPageManager webPageManager = new WebPageManager();
+    /*ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+    BitcoinService bitcoinService = ctx.getBean(BitcoinService.class);
+    WebPageManager webPageManager = ctx.getBean(WebPageManager.class);*/
 
+    private WebPageManager webPageManager/* = new WebPageManager()*/;
+    private BitcoinService bitcoinService/* = new BitcoinService()*/;
     /**
      * Méthode qui demande les caractéristiques d'un nouveau produit
      * à l'utilisateur et qui l'ajoute au catalogue
@@ -29,9 +38,14 @@ public class ProduitManager {
         }
         System.out.println("Entrez le prix du produit");
         Double prixEuro = scanner.nextDouble();
-
         produits.add(new Produit(intitule, prixEuro));
     }
+    public ProduitManager(BitcoinService bitcoinService, WebPageManager webPageManager) {
+        this.bitcoinService = bitcoinService;
+        this.webPageManager = webPageManager;
+    }
+
+
 
     /**
      * Méthode qui affiche tous les produits du catalogue
