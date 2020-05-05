@@ -1,19 +1,20 @@
 package com.ipiecoles.java.java240;
 
-import com.ipiecoles.java.java240.BitcoinService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import javax.net.ssl.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.BitSet;
 
-@Configuration
-@PropertySource("classpath:app.properties")
-@ComponentScan(basePackages = "com.ipiecoles.java.java240")
-public class SpringConfig {
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
     @Value("${bitcoinService.forceRefresh}")
     private Boolean forceRefresh;
@@ -46,31 +47,4 @@ public class SpringConfig {
 
         return true;
     }
-
-
-
-
-
-    @Bean (name = "bitcoinServiceNC")
-    //@Primary
-    @Qualifier("cache")
-    public BitcoinService bitcoinServiceNoCache(){
-        System.out.println("Instantiation du bean BitcoinService sans cache par Spring");
-        BitcoinService bitcoinService = new BitcoinService(/*webPageManager()*/);
-        bitcoinService.setForceRefresh(forceRefresh);
-        return bitcoinService;
-    }
-
-    /*@Bean
-    @Scope("singleton")
-    public ProduitManager produitManager() {
-        return new ProduitManager(bitcoinService(), webPageManager());
-
-    }*/
-
-    /*@Bean
-    @Scope("singleton")
-    public WebPageManager webPageManager(){
-        return new WebPageManager();
-    }*/
 }
