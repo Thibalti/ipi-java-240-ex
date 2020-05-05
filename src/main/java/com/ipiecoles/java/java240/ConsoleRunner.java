@@ -6,20 +6,23 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.*;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Scanner;
 
 @Component
 public class ConsoleRunner implements CommandLineRunner {
 
+    @Autowired
+    private ProduitManager pm;
+
+    @Resource(name = "bitcoinServiceCacheProperty")
+    private BitcoinService bitcoinServiceWithoutCache;
+
 
     public void run(String... args) throws IOException {
         // Point d'entrée de votre application en ligne de commande.
 
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(Application.class);
-        BitcoinService bitcoinServiceWhithoutCache = ctx.getBean("bitcoinServiceNC", BitcoinService.class);
-        ProduitManager pm = ctx.getBean(ProduitManager.class);
-        //WebPageManager webPageManager = ctx.getBean(WebPageManager.class);
 
         System.out.println("Bienvenue !");
         while (true) {
@@ -36,7 +39,7 @@ public class ConsoleRunner implements CommandLineRunner {
             switch (saisie) {
                 case 1:
                     //BitcoinService bitcoinService = new BitcoinService();
-                    System.out.println("1 BTC = " + bitcoinServiceWhithoutCache.getBitcoinRate() + " €");
+                    System.out.println("1 BTC = " + bitcoinServiceWithoutCache.getBitcoinRate() + " €");
                     break;
                 case 2:
                     pm.ajouterProduit();

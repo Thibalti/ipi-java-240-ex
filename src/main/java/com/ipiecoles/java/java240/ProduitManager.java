@@ -22,7 +22,7 @@ public class ProduitManager {
     @Autowired
     private WebPageManager webPageManager/* = new WebPageManager()*/;
     @Autowired
-    @Qualifier("cache")
+    //@Qualifier("cache")
     private BitcoinService bitcoinService/* = new BitcoinService()*/;
 
     @Resource(name = "disableSSL")

@@ -19,6 +19,13 @@ public class Application {
     @Value("${bitcoinService.forceRefresh}")
     private Boolean forceRefresh;
 
+    @Bean(name = "bitcoinServiceCacheProperty")
+    public BitcoinService bitcoinServiceCacheProperty(){
+        BitcoinService bitcoinService= new BitcoinService();
+        bitcoinService.setForceRefresh(forceRefresh);
+        return bitcoinService;
+    }
+
     @Bean(name = "disableSSL")
     public Boolean disableSSLValidation() throws Exception {
         final SSLContext sslContext = SSLContext.getInstance("TLS");
