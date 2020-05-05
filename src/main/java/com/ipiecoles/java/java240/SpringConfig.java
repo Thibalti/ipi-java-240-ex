@@ -1,8 +1,6 @@
 package com.ipiecoles.java.java240;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 import javax.net.ssl.*;
 import java.security.cert.CertificateException;
@@ -10,6 +8,7 @@ import java.security.cert.X509Certificate;
 import java.util.BitSet;
 
 @Configuration
+@ComponentScan(basePackages = "com.ipiecoles.java.java240")
 public class SpringConfig {
 
     @Bean
@@ -45,29 +44,29 @@ public class SpringConfig {
     @Scope("singleton")
     public BitcoinService bitcoinService(){
         System.out.println("Instantiation du bean BitcoinService par Spring");
-        BitcoinService bitcoinService = new BitcoinService(webPageManager());
+        BitcoinService bitcoinService = new BitcoinService(/*webPageManager()*/);
         return bitcoinService;
     }
 
     @Bean (name = "bitcoinServiceNC")
-    @Scope("singleton")
+    @Primary
     public BitcoinService bitcoinServiceNoCache(){
         System.out.println("Instantiation du bean BitcoinService sans cache par Spring");
-        BitcoinService bitcoinService = new BitcoinService(webPageManager());
+        BitcoinService bitcoinService = new BitcoinService(/*webPageManager()*/);
         bitcoinService.setForceRefresh(true);
         return bitcoinService;
     }
 
-    @Bean
+    /*@Bean
     @Scope("singleton")
     public ProduitManager produitManager() {
         return new ProduitManager(bitcoinService(), webPageManager());
 
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     @Scope("singleton")
     public WebPageManager webPageManager(){
         return new WebPageManager();
-    }
+    }*/
 }

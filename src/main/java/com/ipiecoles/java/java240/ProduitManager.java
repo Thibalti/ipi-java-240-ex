@@ -3,25 +3,29 @@ package com.ipiecoles.java.java240;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class ProduitManager {
 
     private List<Produit> produits = new ArrayList<>();
 
-    //private BitcoinService bitcoinService = new BitcoinService(webPageManager);
-    //private WebPageManager webPageManager = new WebPageManager();
-
-    /*ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-    BitcoinService bitcoinService = ctx.getBean(BitcoinService.class);
-    WebPageManager webPageManager = ctx.getBean(WebPageManager.class);*/
-
+    //Injecté automatiquement par Spring (@Component sur ProduitManager et sur WebPageManager)
+    @Autowired
     private WebPageManager webPageManager/* = new WebPageManager()*/;
+    @Autowired
     private BitcoinService bitcoinService/* = new BitcoinService()*/;
+
+    public ProduitManager(BitcoinService bitcoinService/*, WebPageManager webPageManager*/) {
+        this.bitcoinService = bitcoinService;
+        //this.webPageManager = webPageManager;
+    }
+
 
 
     /**
@@ -41,10 +45,6 @@ public class ProduitManager {
         System.out.println("Entrez le prix du produit");
         Double prixEuro = scanner.nextDouble();
         produits.add(new Produit(intitule, prixEuro));
-    }
-    public ProduitManager(BitcoinService bitcoinService, WebPageManager webPageManager) {
-        this.bitcoinService = bitcoinService;
-        this.webPageManager = webPageManager;
     }
 
 
