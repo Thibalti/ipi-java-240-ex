@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+    //test
 
     public static void main(String[] args) throws IOException {
         BitcoinService bitcoinService = new BitcoinService();
