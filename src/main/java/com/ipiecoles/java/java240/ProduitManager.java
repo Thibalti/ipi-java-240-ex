@@ -5,6 +5,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,9 @@ public class ProduitManager {
     private WebPageManager webPageManager/* = new WebPageManager()*/;
     @Autowired
     private BitcoinService bitcoinService/* = new BitcoinService()*/;
+
+    @Resource(name = "disableSSL")
+    private Object disableSSL;
 
     public ProduitManager(BitcoinService bitcoinService/*, WebPageManager webPageManager*/) {
         this.bitcoinService = bitcoinService;
@@ -71,6 +76,7 @@ public class ProduitManager {
      * Méthode qui initialise le catalogue à partir d'un fichier distant.
      * @throws IOException
      */
+    @PostConstruct
     public void initialiserCatalogue() throws IOException {
         //WebPageManager webPageManager = new WebPageManager();
         String catalogue = webPageManager.getPageContentsFromCacheIfExists("https://pjvilloud.github.io/ipi-java-240-cours/catalogue.txt");

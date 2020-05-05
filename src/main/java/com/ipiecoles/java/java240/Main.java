@@ -25,7 +25,7 @@ public class Main {
             System.out.println("2 - Ajouter un produit au catalogue");
             System.out.println("3 - Voir tous les produits du catalogue");
             System.out.println("4 - Voir les détails d'un produit");
-            System.out.println("5 - Initialiser le catalogue");
+            //System.out.println("5 - Initialiser le catalogue");
             System.out.println("0 - Quitter");
 
             Scanner scanner = new Scanner(System.in);

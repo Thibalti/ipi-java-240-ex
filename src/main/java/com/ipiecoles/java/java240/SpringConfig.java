@@ -11,7 +11,7 @@ import java.util.BitSet;
 @ComponentScan(basePackages = "com.ipiecoles.java.java240")
 public class SpringConfig {
 
-    @Bean
+    @Bean(name = "disableSSL")
     public Boolean disableSSLValidation() throws Exception {
         final SSLContext sslContext = SSLContext.getInstance("TLS");
 
