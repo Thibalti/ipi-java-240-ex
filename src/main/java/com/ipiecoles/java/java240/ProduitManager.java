@@ -22,6 +22,8 @@ public class ProduitManager {
 
     private WebPageManager webPageManager/* = new WebPageManager()*/;
     private BitcoinService bitcoinService/* = new BitcoinService()*/;
+
+
     /**
      * Méthode qui demande les caractéristiques d'un nouveau produit
      * à l'utilisateur et qui l'ajoute au catalogue

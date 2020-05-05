@@ -41,10 +41,20 @@ public class SpringConfig {
         return true;
     }
 
-    @Bean
+    @Bean (name = "bitcoinService")
     @Scope("singleton")
     public BitcoinService bitcoinService(){
+        System.out.println("Instantiation du bean BitcoinService par Spring");
         BitcoinService bitcoinService = new BitcoinService(webPageManager());
+        return bitcoinService;
+    }
+
+    @Bean (name = "bitcoinServiceNC")
+    @Scope("singleton")
+    public BitcoinService bitcoinServiceNoCache(){
+        System.out.println("Instantiation du bean BitcoinService sans cache par Spring");
+        BitcoinService bitcoinService = new BitcoinService(webPageManager());
+        bitcoinService.setForceRefresh(true);
         return bitcoinService;
     }
 
